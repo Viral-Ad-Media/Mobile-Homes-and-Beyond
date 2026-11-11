@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Entry, excerptOf, formatDate, getCategory } from "@/lib/content";
+import { Category, Entry, excerptOf, formatDate } from "@/lib/content";
 
-export default function PostCard({ post }: { post: Entry }) {
-  const cat = post.categories[0] ? getCategory(post.categories[0]) : undefined;
+export default function PostCard({ post, categories }: { post: Entry; categories: Category[] }) {
+  const cat = categories.find((c) => c.slug === post.categories[0]);
   return (
     <article className="card">
       <Link href={`/${post.slug}/`} className="card-media">
@@ -22,7 +22,7 @@ export default function PostCard({ post }: { post: Entry }) {
         <h3>
           <Link href={`/${post.slug}/`}>{post.title}</Link>
         </h3>
-        {excerptOf(post) && <p>{excerptOf(post)}</p>}
+        <p>{excerptOf(post, 22)}</p>
         <div className="card-meta">{formatDate(post.date)}</div>
       </div>
     </article>
