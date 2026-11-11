@@ -13,10 +13,17 @@ const hijacked: Record<string, string> = {
   "/mobile-homes-fiber-cement-skirting": "/mobile-homes-fiber-cement-skirting-installation/",
   "/mobile-homes-lattice-skirting": "/best-mobile-homes-lattice-skirting/",
   "/mobile-homes-vinyl-skirting": "/mobilehomes-vinyl-skirting/",
+  // Older slugs of current posts
+  "/lattice-skirting-types-and-the-best-for-mobile-homes": "/best-mobile-homes-lattice-skirting/",
+  "/manufactured-home-financing-options-comparing-loans": "/manufactured-home-financing-options/",
+  "/mobile-home-skirting-repair-how-to-spot-damage-early": "/mobile-home-skirting-repair/",
+  "/home": "/",
 };
 
 const nextConfig: NextConfig = {
   trailingSlash: true, // match WordPress permalinks (/slug/)
+  // proxy.ts adds the trailing slash itself so /api/auth/* (Better Auth) is left alone.
+  skipTrailingSlashRedirect: true,
   images: { unoptimized: true },
   async redirects() {
     return [

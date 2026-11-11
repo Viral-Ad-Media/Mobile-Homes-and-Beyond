@@ -1,0 +1,33 @@
+.admin { padding-block: 40px 64px; }
+.admin h1 { font-size: 32px; margin-bottom: 8px; }
+.admin-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 24px; }
+.admin-bar .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.admin-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.admin-table th, .admin-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.admin-table th { font: 600 13px var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; color: var(--secondary); }
+.admin-table-wrap { overflow-x: auto; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; background: var(--bg-alt); color: var(--secondary); }
+.badge.draft { background: #fff3cd; color: #7a5a00; }
+.form { display: grid; gap: 18px; max-width: 980px; }
+.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.field { display: grid; gap: 6px; }
+.field label, .field legend { font: 600 14px var(--font-head); color: var(--heading); }
+.field small { color: var(--secondary); font-size: 13px; }
+.field input, .field select, .field textarea {
+  font: inherit; font-size: 15px; padding: 10px 12px; border: 1px solid #cdd5cc; border-radius: 6px; width: 100%; background: #fff; color: var(--heading);
+}
+.field textarea.code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; line-height: 1.5; min-height: 420px; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--brand); outline-offset: 1px; }
+fieldset.field { border: 1px solid var(--border); border-radius: 6px; padding: 12px 14px; }
+.checks { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+.checks label { font: 400 15px var(--font-body); display: inline-flex; gap: 6px; align-items: center; }
+.alert { padding: 10px 14px; border-radius: 6px; font-size: 15px; }
+.alert.error { background: #fdecea; color: #8a1c12; border: 1px solid #f5c2bd; }
+.alert.ok { background: #e8f3e8; color: #23502a; border: 1px solid #bcdcbc; }
+.btn-danger { background: #b42318; border-color: #b42318; }
+.btn-danger:hover { background: #8a1c12; border-color: #8a1c12; }
+.btn-plain { background: transparent; color: var(--brand-dark); border-color: var(--border); }
+.btn-plain:hover { background: var(--bg-alt); color: var(--brand-dark); border-color: var(--border); }
+.auth-card { max-width: 420px; margin: 24px auto; padding: 28px; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; }
+.auth-card form { display: grid; gap: 14px; }
+.preview { border: 1px solid var(--border); border-radius: 6px; padding: 16px 20px; max-height: 520px; overflow: auto; }

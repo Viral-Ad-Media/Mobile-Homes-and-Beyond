@@ -1,50 +1,68 @@
-# Mobile Homes & Beyond — Next.js
+# Mobile Homes and Beyond — Next.js + Neon + Better Auth
 
-A static Next.js (App Router) rebuild of mobilehomesandbeyond.com, made from the
-2026-10-19 WordPress backup.
+A rebuild of mobilehomesandbeyond.com (formerly WordPress) in Next.js 16. The
+content lives in Neon Postgres, and a small `/admin` area protected by
+Better Auth lets you edit it.
 
-## Run it
+## What's where
+
+| Path | What it is |
+| --- | --- |
+| `app/` | Public site (home, blog, posts, pages and categories at the original WordPress URLs) and `/admin` |
+| `lib/content.ts` | Reads content from Neon, or from `content/site.json` when no `DATABASE_URL` is set |
+| `lib/auth.ts` | Better Auth with email and password. There is no public sign-up: only the first account, matching `ADMIN_EMAIL`, can be created |
+| `db/schema.sql` | Tables for content and for Better Auth (mirrored in `lib/db/schema.ts`) |
+| `content/site.json` | All posts and pages, imported from the WordPress database. It seeds Neon |
+| `public/wp-content/uploads/` | Original images at their original paths |
+| `scripts/import-wordpress.mjs` | WordPress SQL dump → `content/site.json` |
+| `scripts/db-setup.mjs` | Creates the tables and loads `content/site.json` into the database |
+| `next.config.ts`, `proxy.ts` | Redirects old and hacked URLs; adds WordPress-style trailing slashes |
+
+## Environment variables
+
+Copy `.env.example` to `.env.local` (or set these in your host, e.g. Vercel):
+
+- `DATABASE_URL`: the Neon connection string (Neon console → project
+  **mobile-homes-and-beyond** → Connect)
+- `BETTER_AUTH_SECRET`: a long random string (`openssl rand -base64 32`)
+- `BETTER_AUTH_URL` and `NEXT_PUBLIC_SITE_URL`: the public URL, e.g. `https://mobilehomesandbeyond.com`
+- `ADMIN_EMAIL`: the email allowed to create the admin account
+
+## Run / deploy
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
-npm run build      # production build (all pages are pre-rendered)
+npm run dev      # http://localhost:3000
+npm run build    # runs db:setup (tables + content, if missing) then next build
 npm start
 ```
 
-## Where the content lives
+`npm run build` creates the tables and loads any posts that aren't in the
+database yet, so the first deploy fills an empty Neon database. It never
+overwrites rows that already exist, so edits made in `/admin` survive later
+deploys.
 
-- `content/site.json` holds every page, post and category.
-- `public/wp-content/uploads/` holds the original images at their original
-  paths, so links inside old posts keep working.
-- `app/fonts.css` + `public/fonts/` are self-hosted copies of the original
-  fonts (Ubuntu for headings, Hind Siliguri for body text). Colours come from
-  the original Elementor kit (`#4D7A4D` green).
+## Admin
 
-The file backup did **not** include the database, so `content/site.json` is
-currently a seed built from the Rank Math sitemaps: correct URLs, dates,
-images and banner titles, but no article text. To load the real text, export
-the database (phpMyAdmin → Export → SQL; tables use the `f5_` prefix) and run:
+1. Deploy with the environment variables above.
+2. Visit `/admin/setup/` and create your account using the `ADMIN_EMAIL` address. This works only once.
+3. Sign in at `/admin/login/`. You can then edit, add, draft or delete posts
+   and pages. Saving updates the live site immediately. Bodies are HTML and are
+   sanitised on save, so scripts are stripped.
+
+## Re-importing from WordPress
 
 ```bash
-npm run import:wp -- path/to/database.sql     # .sql.gz also works
+npm run import:wp -- path/to/database.sql          # writes content/site.json
+npm run db:setup -- --reset-content                # overwrites DB content (loses /admin edits)
 ```
 
-The importer reads the dump as text (nothing in it is executed), keeps only
-published posts and pages, converts site links to relative ones, renders
-TablePress tables and Elementor content, drops shortcodes, and sanitises
-every body so scripts injected by the hack are removed. It prints any images
-that are referenced but missing, and any posts that contained suspicious code.
-
-## URLs
-
-Slugs match WordPress exactly (`/slug/`, categories at `/rock-skirting/` etc.).
-`next.config.ts` also 301-redirects the fake URLs the hack created
-(e.g. `/mobile-homes-fiber-cement-skirting/`) to the real articles.
+The importer parses the dump as text without running any of it. It keeps
+published posts and pages, fixes old internal links, renders TablePress and
+Elementor content, and sanitises every body.
 
 ## Security note
 
-The old WordPress install was compromised (malicious `mu-plugins`, fake
-proxy folders, a replaced `sitemap.xml`). None of that code is in this
-project. Before pointing DNS here, rotate the hosting, WordPress and database
-passwords.
+The old WordPress install was compromised: it had malicious `mu-plugins`, fake
+proxy folders and a replaced `sitemap.xml`. None of that code is in this
+project. Rotate the hosting, WordPress and database passwords.
