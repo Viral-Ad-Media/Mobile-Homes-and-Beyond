@@ -1,0 +1,420 @@
+{
+  "source": "seed: Rank Math sitemaps in the 2026-10-19 file backup (no database). Run `npm run import:wp -- <dump.sql>` to replace with real content.",
+  "site": {
+    "name": "Mobile Homes & Beyond",
+    "tagline": "Mobile home skirting guides, reviews and tips",
+    "url": "https://mobilehomesandbeyond.com"
+  },
+  "categories": [
+    {
+      "slug": "mobile-home-skirting",
+      "name": "Mobile Home Skirting",
+      "description": ""
+    },
+    {
+      "slug": "traditional-skirting",
+      "name": "Traditional Skirting",
+      "description": ""
+    },
+    {
+      "slug": "rock-skirting",
+      "name": "Rock Skirting",
+      "description": ""
+    },
+    {
+      "slug": "premium-skirting",
+      "name": "Premium Skirting",
+      "description": ""
+    },
+    {
+      "slug": "home-financing",
+      "name": "Home Financing",
+      "description": ""
+    }
+  ],
+  "entries": [
+    {
+      "type": "post",
+      "slug": "metal-mobilehome-skirting",
+      "title": "Top 5 Metal Skirting Installation Accessories",
+      "date": "2026-08-31T19:00:34+00:00",
+      "modified": "2026-08-31T19:00:34+00:00",
+      "categories": [
+        "traditional-skirting"
+      ],
+      "featuredImage": "/wp-content/uploads/2023/02/Mobile-Homes-Beyond_Artboard-4.jpg",
+      "images": [
+        "/wp-content/uploads/2022/07/metal-skirting-installation-1024x576.jpg",
+        "/wp-content/uploads/2022/07/Vent-Systems-Galvanized-Air-Vent-with-Built-in-Pest-Guard-Screen-300x150.jpg",
+        "/wp-content/uploads/2022/07/PackageZoom-Polypropylene-Heavy-Duty-Grade-Strapping-259x300.jpg",
+        "/wp-content/uploads/2022/07/uxcell-Heat-Sound-Deadening-Insulation-Mat-300x208.jpg",
+        "/wp-content/uploads/2022/07/Crescent-Wiss-Multi-Purpose-Cutter-81x300.jpg",
+        "/wp-content/uploads/2022/07/TECCPO-Cordless-Circular-Saw-with-Laser-300x295.jpg"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "post",
+      "slug": "mobilehome-wood-skirting",
+      "title": "Best Wood Boards for Mobile Homes",
+      "date": "2026-08-31T19:00:43+00:00",
+      "modified": "2026-08-31T19:00:43+00:00",
+      "categories": [
+        "traditional-skirting"
+      ],
+      "featuredImage": "/wp-content/uploads/2023/02/Mobile-Home-Skirting_Artboard-1.jpg",
+      "images": [
+        "/wp-content/uploads/2022/07/plywood-skirting.png",
+        "/wp-content/uploads/2022/07/American-Walnut-Stock-Lumber-Wood-Boards-300x196.jpg",
+        "/wp-content/uploads/2022/07/Prime-Black-Walnut-Lumber-Wood-Boards-300x295.jpg",
+        "/wp-content/uploads/2022/07/KGM-Moulding-Berlin-Pine-Wood-Boards-300x170.jpg",
+        "/wp-content/uploads/2022/07/SLATPANEL-Two-Acoustic-Wood-Wall-Veneer-Slat-Panels-83x300.jpg",
+        "/wp-content/uploads/2022/07/Spanish-Cedar-Stock-Lumber-Wood-Boards-174x300.jpg"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "post",
+      "slug": "mobilehomes-vinyl-skirting",
+      "title": "Top 5 Vinyl Skirting Panels for Mobile Homes",
+      "date": "2026-08-31T19:00:22+00:00",
+      "modified": "2026-08-31T19:00:22+00:00",
+      "categories": [
+        "traditional-skirting"
+      ],
+      "featuredImage": "/wp-content/uploads/2023/02/Mobile-Home-Skirting_Tips.png",
+      "images": [
+        "/wp-content/uploads/2022/07/vinyl-skirting-for-mobile-homes.jpg",
+        "/wp-content/uploads/2022/07/vinyl-vented-white-panel-224x300.jpg",
+        "/wp-content/uploads/2022/07/vinyl-underpinning-white-panel-197x300.jpg",
+        "/wp-content/uploads/2022/07/vinyl-solid-panel-150x150.jpg",
+        "/wp-content/uploads/2022/07/vinyl-dark-brown-vented-panel-137x300.jpg",
+        "/wp-content/uploads/2022/07/vinyl-round-panel-300x300.jpg",
+        "/wp-content/uploads/2022/07/mobile-home-vinyl-skirting-1024x683.jpg",
+        "/wp-content/uploads/2022/07/vinyl-solid-panel-178x300.jpg"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "post",
+      "slug": "mobilehomes-concrete-skirting",
+      "title": "Concrete Skirting: Easy Installation Steps for Mobile Homes",
+      "date": "2026-08-31T18:59:30+00:00",
+      "modified": "2026-08-31T18:59:30+00:00",
+      "categories": [
+        "rock-skirting"
+      ],
+      "featuredImage": "/wp-content/uploads/2023/02/Mobile-Homes-Skirting-03.png",
+      "images": [
+        "/wp-content/uploads/2022/07/mobile-home-concrete-skirting-1024x576.jpg",
+        "/wp-content/uploads/2022/07/VEVOR-Electric-Concrete-Saw-300x243.jpg",
+        "/wp-content/uploads/2022/07/SIKA-Concrete-bonding-adhesive-152x300.jpg",
+        "/wp-content/uploads/2022/07/Funmit-Louvered-Vent-Cover-287x300.jpg"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "post",
+      "slug": "mobilehomes-brick-skirting",
+      "title": "Brick Skirting: 7 Advantages for Mobile Homes",
+      "date": "2026-08-31T18:59:09+00:00",
+      "modified": "2026-08-31T18:59:09+00:00",
+      "categories": [
+        "rock-skirting"
+      ],
+      "featuredImage": "/wp-content/uploads/2023/02/Mobile-Homes-Skirting-02.png",
+      "images": [
+        "/wp-content/uploads/2022/07/brick-skirting-1.jpg",
+        "/wp-content/uploads/2022/07/brick-skirting-for-mobile-home.jpg",
+        "/wp-content/uploads/2022/07/Evolution-R230DCT-Diamond-Masonry-Saw-300x156.jpg",
+        "/wp-content/uploads/2022/07/Amazon-Basics-9-Inch-Magnetic-Torpedo-Level-and-Ruler-300x100.jpg",
+        "/wp-content/uploads/2022/07/IRWIN-STRAIT-LINE-Chalk-Line-297x300.jpg"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "post",
+      "slug": "best-mobile-homes-faux-stone-skirting",
+      "title": "Best Faux Stone Skirting Panels for Mobile Homes",
+      "date": "2026-08-31T18:58:33+00:00",
+      "modified": "2026-08-31T18:58:33+00:00",
+      "categories": [
+        "rock-skirting"
+      ],
+      "featuredImage": "/wp-content/uploads/2023/02/Mobile-Home-Skirting_Artboard-3.jpg",
+      "images": [
+        "/wp-content/uploads/2022/07/faux-stone-mobile-skirting.jpg",
+        "/wp-content/uploads/2022/07/GenStone-Faux-Stacked-Stone-Panel-300x88.jpg",
+        "/wp-content/uploads/2022/07/TroyStudio-Faux-Stone-Brick-Siding-Panels-300x300.jpg",
+        "/wp-content/uploads/2022/07/Faux-Stone-Deep-Stacked-Stone-Wall-Siding-Panel.jpg",
+        "/wp-content/uploads/2022/07/NextStone-Polyurethane-Faux-Stone-Panel-300x97.jpg",
+        "/wp-content/uploads/2022/07/Ekena-Millwork-Cascade-Stacked-Stonewall-Faux-Stone-Siding-Panel-300x154.jpg"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "post",
+      "slug": "mobile-homes-fiber-cement-skirting-installation",
+      "title": "Top Fiber Cement Skirting Installation Kits",
+      "date": "2026-08-31T18:57:51+00:00",
+      "modified": "2026-08-31T18:57:51+00:00",
+      "categories": [
+        "premium-skirting"
+      ],
+      "featuredImage": "/wp-content/uploads/2023/02/Mobile-Home-Skirting_Artboard-5.png",
+      "images": [
+        "/wp-content/uploads/2022/07/fiber-cement-board-skirting.jpg",
+        "/wp-content/uploads/2022/07/Malco-FCC4-Straight-Cut-Fiber-Cement-Siding-Guillotine-300x273.jpg",
+        "/wp-content/uploads/2022/07/Bullet-Tools-Shear-Siding-Cutter-with-Blade-for-Fiber-Cement-Siding-300x229.jpg",
+        "/wp-content/uploads/2022/07/PacTool-SA903-Gecko-Gauge-Siding-Mounting-Kit-for-Fiber-Cement-Installation-213x300.jpg",
+        "/wp-content/uploads/2022/07/NPC-Solar-Seal-for-Fiber-Cement-Siding-300x171.jpg",
+        "/wp-content/uploads/2022/07/Malco-FCG2-Fiber-Cement-Siding-Overlap-Gauge-Set-300x267.jpg",
+        "/wp-content/uploads/2022/07/SKILSAW-Sidewinder-Circular-Saw-for-Fiber-Cement-300x131.jpg",
+        "/wp-content/uploads/2022/07/SHALL-Electric-Fiber-Cement-Siding-Shear-300x280.jpg"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "post",
+      "slug": "best-mobile-homes-lattice-skirting",
+      "title": "Best Lattice Fence of 2023 for Home Skirting",
+      "date": "2026-08-31T18:56:33+00:00",
+      "modified": "2026-08-31T18:56:33+00:00",
+      "categories": [
+        "premium-skirting"
+      ],
+      "featuredImage": "/wp-content/uploads/2023/02/Mobile-Home-Skirting_Artboard-4.png",
+      "images": [
+        "/wp-content/uploads/2022/07/vinyl-lattice-skirting.jpg",
+        "/wp-content/uploads/2022/07/lattice-skirting.jpg",
+        "/wp-content/uploads/2022/07/white-plastic-lattice-for-mobile-home-skirting-300x160.jpg",
+        "/wp-content/uploads/2022/07/Collections-Etc-Lattice-Fence-300x224.jpg",
+        "/wp-content/uploads/2022/07/GRID-AXCENTS-Wave-Decorative-Lattice-300x300.jpg",
+        "/wp-content/uploads/2022/07/GLANT-Willow-Wood-Lattice-Fence.jpg"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "post",
+      "slug": "cost-of-a-manufactured-home-in-2026",
+      "title": "Cost of a Manufactured Home in 2026",
+      "date": "2026-09-07T19:08:15+00:00",
+      "modified": "2026-09-07T19:08:15+00:00",
+      "categories": [
+        "home-financing"
+      ],
+      "featuredImage": "/wp-content/uploads/2026/09/cost-of-a-manufactured-home-2026.jpg",
+      "images": [
+        "/wp-content/uploads/2026/09/cost-of-a-manufactured-home-2026.jpg"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "post",
+      "slug": "mobile-home-skirting-repair",
+      "title": "Mobile Home Skirting Repair",
+      "date": "2026-08-19T21:14:20+00:00",
+      "modified": "2026-08-19T21:14:20+00:00",
+      "categories": [
+        "mobile-home-skirting"
+      ],
+      "featuredImage": "/wp-content/uploads/2023/02/Mobile-Homes-Skirting-03.png",
+      "images": [
+        "/wp-content/uploads/2023/02/Mobile-Homes-Skirting-03.png"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "post",
+      "slug": "mobile-home-underpinning-vs-skirting",
+      "title": "Mobile Home Underpinning vs Skirting",
+      "date": "2026-08-19T21:14:16+00:00",
+      "modified": "2026-08-19T21:14:16+00:00",
+      "categories": [
+        "mobile-home-skirting"
+      ],
+      "featuredImage": "/wp-content/uploads/2026/07/mobile-home-underpinning-vs-skirting-what-thumbnail.jpg",
+      "images": [
+        "/wp-content/uploads/2026/07/mobile-home-underpinning-vs-skirting-what-thumbnail.jpg"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "post",
+      "slug": "manufactured-home-financing-options",
+      "title": "Manufactured Home Financing Options",
+      "date": "2026-08-19T21:14:13+00:00",
+      "modified": "2026-08-19T21:14:13+00:00",
+      "categories": [
+        "home-financing"
+      ],
+      "featuredImage": "/wp-content/uploads/2026/07/manufactured-home-financing-options-2026-thumbnail.jpg",
+      "images": [
+        "/wp-content/uploads/2026/07/manufactured-home-financing-options-2026-thumbnail.jpg"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "page",
+      "slug": "",
+      "title": "Home",
+      "date": "2023-02-16T16:19:44+00:00",
+      "modified": "2023-02-16T16:19:44+00:00",
+      "categories": [],
+      "featuredImage": null,
+      "images": [
+        "/wp-content/uploads/2023/02/Mobile-Home-Skirting_Tips.png",
+        "/wp-content/uploads/2023/02/Mobile-Home-Skirting_Artboard-1.jpg",
+        "/wp-content/uploads/2023/02/Mobile-Homes-Beyond_Artboard-4.jpg",
+        "/wp-content/uploads/2023/02/Mobile-Home-Skirting_Artboard-4.png",
+        "/wp-content/uploads/2023/02/Mobile-Home-Skirting_Artboard-5.png",
+        "/wp-content/uploads/2023/02/Mobile-Home-Skirting_Artboard-3.jpg",
+        "/wp-content/uploads/2023/02/Mobile-Homes-Skirting-02.png",
+        "/wp-content/uploads/2023/02/Mobile-Homes-Skirting-03.png"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "page",
+      "slug": "mobile-home-skirting",
+      "title": "Mobile Home Skirting",
+      "date": "2022-08-15T10:06:20+00:00",
+      "modified": "2022-08-15T10:06:20+00:00",
+      "categories": [],
+      "featuredImage": null,
+      "images": [
+        "/wp-content/uploads/2022/08/Plant-based-recipe-hero.png",
+        "/wp-content/uploads/2022/08/Col-background.png",
+        "/wp-content/uploads/2022/07/wood-skirting.jpg",
+        "/wp-content/uploads/2022/07/fiber-cement-skirting.jpg",
+        "/wp-content/uploads/2022/07/mobile-home-foundation.jpg",
+        "/wp-content/uploads/2022/07/metal-skirting.jpg",
+        "/wp-content/uploads/2022/08/03.png",
+        "/wp-content/uploads/2022/07/vinyl-skirting-1-1024x460.jpg",
+        "/wp-content/uploads/2022/07/faux-stone-skirting.jpg",
+        "/wp-content/uploads/2022/07/concrete-skirting-1024x765.jpg",
+        "/wp-content/uploads/2022/07/brick-skirting.jpg",
+        "/wp-content/uploads/2022/07/foam-skirting-1024x772.jpg",
+        "/wp-content/uploads/2022/07/lattice-skirting.jpg",
+        "/wp-content/uploads/2022/08/FAQ.png"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "page",
+      "slug": "tips",
+      "title": "Tips",
+      "date": "2022-09-15T02:23:26+00:00",
+      "modified": "2022-09-15T02:23:26+00:00",
+      "categories": [],
+      "featuredImage": null,
+      "images": [
+        "/wp-content/uploads/2022/09/woodworking-1.png",
+        "/wp-content/uploads/2022/09/play-GROUND.png",
+        "/wp-content/uploads/2022/09/Solution.png",
+        "/wp-content/uploads/2022/09/4-715x1024.jpg",
+        "/wp-content/uploads/2022/09/amazing-woodworking-projects1-1.png",
+        "/wp-content/uploads/2022/09/down-arrow.png",
+        "/wp-content/uploads/2022/09/13-683x1024.jpg",
+        "/wp-content/uploads/2022/09/14.jpg",
+        "/wp-content/uploads/2022/09/15-668x1024.jpg",
+        "/wp-content/uploads/2022/09/16-668x1024.jpg"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "page",
+      "slug": "teds-woodworking-optin",
+      "title": "Ted's Woodworking",
+      "date": "2022-09-13T07:46:15+00:00",
+      "modified": "2022-09-13T07:46:15+00:00",
+      "categories": [],
+      "featuredImage": null,
+      "images": [
+        "/wp-content/uploads/2022/09/Woodwork.png"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    },
+    {
+      "type": "page",
+      "slug": "about-author",
+      "title": "About the Author",
+      "date": "2022-08-05T21:03:10+00:00",
+      "modified": "2022-08-05T21:03:10+00:00",
+      "categories": [],
+      "featuredImage": null,
+      "images": [
+        "/wp-content/uploads/2022/07/young-male-traveler-in-hiking-outfit-standing-near-2021-09-02-08-44-44-utc-300x300.jpg"
+      ],
+      "excerpt": "",
+      "html": "",
+      "seoTitle": null,
+      "seoDescription": null,
+      "needsImport": true
+    }
+  ]
+}
