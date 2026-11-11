@@ -1,0 +1,24 @@
+{
+  "name": "mobilehomesandbeyond",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "import:wp": "node scripts/import-wordpress.mjs"
+  },
+  "dependencies": {
+    "next": "^16.4.6",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sanitize-html": "^2.18.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "@types/react": "^19.2.2",
+    "@types/sanitize-html": "^2.16.0",
+    "typescript": "^5.9.3"
+  }
+}
