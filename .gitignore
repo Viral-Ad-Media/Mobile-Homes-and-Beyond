@@ -4,3 +4,6 @@ out
 *.sql
 *.sql.gz
 .env*
+!.env.example
+*.tsbuildinfo
+next-env.d.ts

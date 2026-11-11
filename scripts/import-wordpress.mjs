@@ -14,6 +14,7 @@ import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
 import sanitizeHtml from "sanitize-html";
+import { sanitizeBody } from "../lib/sanitize.mjs";
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const OUT = path.join(ROOT, "content", "site.json");
@@ -50,29 +51,49 @@ function columnsFromCreate(table) {
 }
 
 /** Parse "(a,'b',NULL),(...)" starting at index i; returns [rows, endIndex]. */
+const ESC = { n: "\n", r: "\r", t: "\t", 0: "\0", Z: "\x1a", b: "\b" };
 function parseTuples(s, i) {
   const rows = [];
-  let row = null, val = "", inStr = false, quoted = false;
-  for (; i < s.length; i++) {
+  let row = null;
+  const n = s.length;
+  while (i < n) {
     const c = s[i];
-    if (inStr) {
-      if (c === "\\") {
-        const n = s[++i];
-        val += { n: "\n", r: "\r", t: "\t", 0: "\0", Z: "\x1a", b: "\b" }[n] ?? n;
-      } else if (c === "'") {
-        if (s[i + 1] === "'") { val += "'"; i++; } else inStr = false;
-      } else val += c;
-      continue;
+    if (row === null) {
+      if (c === "(") { row = []; i++; continue; }
+      if (c === ";") return [rows, i];
+      i++; continue;
     }
-    if (c === "'") { inStr = true; quoted = true; }
-    else if (c === "(" && row === null) { row = []; val = ""; quoted = false; }
-    else if ((c === "," || c === ")") && row !== null) {
-      const raw = quoted ? val : val.trim();
-      row.push(!quoted && /^NULL$/i.test(raw) ? null : raw);
-      val = ""; quoted = false;
-      if (c === ")") { rows.push(row); row = null; }
-    } else if (c === ";" && row === null) return [rows, i];
-    else if (row !== null) val += c;
+    // inside a row: read one value
+    while (s[i] === " " || s[i] === "\n" || s[i] === "\r" || s[i] === "\t") i++;
+    let value;
+    if (s[i] === "'") {
+      const parts = [];
+      let j = ++i;
+      for (;;) {
+        const q = s.indexOf("'", j), b = s.indexOf("\\", j);
+        if (b !== -1 && b < q) {
+          parts.push(s.slice(j, b));
+          const e = s[b + 1];
+          parts.push(ESC[e] ?? e);
+          j = b + 2;
+        } else if (s[q + 1] === "'") {
+          parts.push(s.slice(j, q), "'"); j = q + 2;
+        } else {
+          parts.push(s.slice(j, q)); i = q + 1; break;
+        }
+      }
+      value = parts.join("");
+    } else {
+      let j = i;
+      while (s[j] !== "," && s[j] !== ")") j++;
+      const raw = s.slice(i, j).trim();
+      value = /^NULL$/i.test(raw) ? null : raw;
+      i = j;
+    }
+    row.push(value);
+    while (s[i] !== "," && s[i] !== ")") i++;
+    if (s[i] === ")") { rows.push(row); row = null; }
+    i++;
   }
   return [rows, i];
 }
@@ -196,32 +217,42 @@ function renderElementor(json) {
 }
 
 const suspicious = [];
+// Old WordPress slugs that later changed (the hack reused them for fake pages).
+const OLD_SLUGS = {
+  "metal-mobile-home-skirting": "metal-mobilehome-skirting",
+  "mobile-home-wood-skirting": "mobilehome-wood-skirting",
+  "mobile-homes-brick-skirting": "mobilehomes-brick-skirting",
+  "mobile-homes-concrete-skirting": "mobilehomes-concrete-skirting",
+  "mobile-homes-faux-stone-skirting": "best-mobile-homes-faux-stone-skirting",
+  "mobile-homes-fiber-cement-skirting": "mobile-homes-fiber-cement-skirting-installation",
+  "mobile-homes-lattice-skirting": "best-mobile-homes-lattice-skirting",
+  "mobile-homes-vinyl-skirting": "mobilehomes-vinyl-skirting",
+  "lattice-skirting-types-and-the-best-for-mobile-homes": "best-mobile-homes-lattice-skirting",
+  "manufactured-home-financing-options-comparing-loans": "manufactured-home-financing-options",
+  "mobile-home-skirting-repair-how-to-spot-damage-early": "mobile-home-skirting-repair",
+};
+// Titles that were cut short in the database.
+const TITLE_FIXES = {
+  "manufactured-home-financing-options":
+    "Manufactured Home Financing Options: Comparing Loans, Rates, and Requirements for 2026",
+};
+
 function clean(html, where) {
   html = html.replace(SITE_HOSTS, "");
+  html = html.replace(/href="\/([a-z0-9-]+)\/?(#[^"]*)?"/g, (m, slug, hash = "") =>
+    OLD_SLUGS[slug] ? `href="/${OLD_SLUGS[slug]}/${hash}"` : m);
   html = html.replace(/<!--[\s\S]*?-->/g, "");
   html = html.replace(/\[table id=["']?(\d+)["']?[^\]]*\/?\]/g, (_, id) => renderTablePress(id));
   html = html.replace(/\[\/?[a-z_-]+[^\]]*\]/gi, ""); // other shortcodes (toc, etc.)
-  if (/<script|eval\(|base64_decode|display:\s*none/i.test(html)) suspicious.push(where);
+  const noCss = html.replace(/<style[\s\S]*?<\/style>/gi, "");
+  if (/<script|eval\(|base64_decode|<iframe(?![^>]*youtube)/i.test(noCss)) suspicious.push(where);
   html = wpautop(html);
-  return sanitizeHtml(html, {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img", "figure", "figcaption", "iframe", "h1", "h2", "span", "del", "ins", "sup", "sub"]),
-    allowedAttributes: {
-      a: ["href", "title", "target", "rel"],
-      img: ["src", "alt", "width", "height", "title"],
-      iframe: ["src", "width", "height", "allow", "allowfullscreen", "title"],
-      "*": ["class", "id"],
-      td: ["colspan", "rowspan"], th: ["colspan", "rowspan"],
-    },
-    allowedIframeHostnames: ["www.youtube.com", "youtube.com", "player.vimeo.com"],
-    transformTags: {
-      a: (tag, attribs) => {
-        const ext = /^https?:\/\//.test(attribs.href || "");
-        return { tagName: "a", attribs: ext ? { ...attribs, rel: "nofollow sponsored noopener", target: "_blank" } : attribs };
-      },
-      img: (tag, attribs) => ({ tagName: "img", attribs: { ...attribs, loading: "lazy" } }),
-    },
-    allowedSchemes: ["http", "https", "mailto", "tel"],
-  });
+  html = sanitizeBody(html);
+  // Elementor's post header (title repeated + "by Author | Last updated on ,"
+  // with an empty date) was rendered into the body; the Next.js template
+  // already shows the title and date.
+  html = html.replace(/^\s*(?:<h1>[\s\S]*?<\/h1>|[^<]*?)\s*by [^|<]{2,60}\|\s*Last updated on\s*,?\s*/, "");
+  return html;
 }
 
 /** Plain text for titles/names: strip tags, decode the entities WordPress stores. */
@@ -241,9 +272,13 @@ function rankMath(v, title) {
 
 // ---------- build entries ----------
 const frontId = option("show_on_front") === "page" ? option("page_on_front") : null;
+// The site's home and blog listings are built by Next.js, so skip the WordPress
+// "posts page" and an unused static front page.
+const skipIds = new Set([option("page_for_posts"), frontId ? null : option("page_on_front")].filter(Boolean));
 const entries = [];
 for (const p of posts) {
   if (p.post_status !== "publish" || !["post", "page"].includes(p.post_type)) continue;
+  if (skipIds.has(p.ID)) continue;
   const m = meta.get(p.ID) ?? {};
   let html = p.post_content || "";
   if (m._elementor_edit_mode === "builder" && m._elementor_data) {
@@ -255,10 +290,13 @@ for (const p of posts) {
   entries.push({
     type: p.post_type,
     slug: p.ID === frontId ? "" : p.post_name,
-    title: text(p.post_title),
+    title: TITLE_FIXES[p.post_name] ?? text(p.post_title),
     date: iso(p.post_date_gmt) ?? iso(p.post_date),
     modified: iso(p.post_modified_gmt) ?? iso(p.post_modified),
-    categories: p.post_type === "post" ? postCats.get(p.ID) ?? [] : [],
+    // Most specific category first ("mobile-home-skirting" is the parent of the others).
+    categories: p.post_type === "post"
+      ? (postCats.get(p.ID) ?? []).sort((a, b) => (a === "mobile-home-skirting") - (b === "mobile-home-skirting"))
+      : [],
     featuredImage: m._thumbnail_id ? attachmentUrl(m._thumbnail_id) : null,
     images: [...html.matchAll(/<img[^>]+src="([^"]+)"/g)].map((x) => x[1]),
     excerpt: text(p.post_excerpt),
@@ -271,12 +309,19 @@ for (const p of posts) {
 const usedCats = new Set(entries.flatMap((e) => e.categories));
 const categories = cats
   .filter((c) => usedCats.has(c.slug))
-  .map((c) => ({ slug: c.slug, name: text(c.name), description: c.description }));
+  .map((c) => {
+    const name = text(c.name);
+    // Some category names were saved all lower-case.
+    const pretty = name === name.toLowerCase() ? name.replace(/\b\w/g, (m) => m.toUpperCase()) : name;
+    return { slug: c.slug, name: pretty, description: c.description };
+  });
 
 const current = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, "utf8")) : {};
 const out = {
   source: `WordPress database import from ${path.basename(file)} on ${new Date().toISOString().slice(0, 10)}`,
-  site: { ...(current.site ?? {}), name: siteName, tagline: text(option("blogdescription")) || current.site?.tagline || "" },
+  site: { ...(current.site ?? {}), name: siteName, // The WordPress tagline is a whole paragraph; keep the short one unless it is short too.
+    tagline: (text(option("blogdescription")).length <= 120 && text(option("blogdescription"))) || current.site?.tagline || "",
+    url: current.site?.url || text(option("home")) },
   categories,
   entries,
 };

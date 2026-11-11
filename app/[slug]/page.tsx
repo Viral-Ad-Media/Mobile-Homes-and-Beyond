@@ -7,28 +7,28 @@ import {
   allSlugs,
   excerptOf,
   formatDate,
-  getCategory,
+  getCategories,
   getEntry,
   getPostsInCategory,
+  siteInfo,
 } from "@/lib/content";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return allSlugs().map((slug) => ({ slug }));
+// Pre-render known URLs; new ones (added in /admin) render on first visit.
+export const revalidate = 3600;
+export async function generateStaticParams() {
+  return (await allSlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const entry = getEntry(slug);
-  const cat = getCategory(slug);
-  const title = entry?.seoTitle || entry?.title || cat?.name || "";
-  const description =
-    entry?.seoDescription || (entry ? excerptOf(entry, 30) : cat?.description) || undefined;
+  const [entry, categories] = await Promise.all([getEntry(slug), getCategories()]);
+  const cat = categories.find((c) => c.slug === slug);
+  const title = entry?.title || cat?.name || "";
+  const description = entry?.seoDescription || (entry ? excerptOf(entry, 30) : cat?.description) || undefined;
   return {
-    title: { absolute: entry?.seoTitle || `${title} | Mobile Homes & Beyond` },
+    title: { absolute: entry?.seoTitle || `${title} | ${siteInfo.name}` },
     description,
     alternates: { canonical: `/${slug}/` },
     openGraph: {
@@ -42,21 +42,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function SlugPage({ params }: Props) {
   const { slug } = await params;
-  const entry = getEntry(slug);
-  const cat = getCategory(slug);
+  const [entry, categories] = await Promise.all([getEntry(slug), getCategories()]);
+  const cat = categories.find((c) => c.slug === slug);
   if (!entry && !cat) notFound();
 
-  const catPosts = cat ? getPostsInCategory(slug) : [];
-
   if (entry?.type === "post") {
-    const postCat = entry.categories[0] ? getCategory(entry.categories[0]) : undefined;
+    const postCat = categories.find((c) => c.slug === entry.categories[0]);
     return (
       <article>
         <section className="page-hero">
           <div className="container narrow">
-            {postCat && (
-              <Link href={`/${postCat.slug}/`} className="card-cat">{postCat.name}</Link>
-            )}
+            {postCat && <Link href={`/${postCat.slug}/`} className="card-cat">{postCat.name}</Link>}
             <h1>{entry.title}</h1>
             <p className="meta">{formatDate(entry.date)}</p>
           </div>
@@ -72,6 +68,7 @@ export default async function SlugPage({ params }: Props) {
     );
   }
 
+  const catPosts = cat ? await getPostsInCategory(slug) : [];
   return (
     <>
       <section className="page-hero">
@@ -89,7 +86,7 @@ export default async function SlugPage({ params }: Props) {
         <section className="container section">
           {entry && <h2 className="section-title">Articles</h2>}
           <div className="card-grid">
-            {catPosts.map((p) => <PostCard key={p.slug} post={p} />)}
+            {catPosts.map((p) => <PostCard key={p.slug} post={p} categories={categories} />)}
           </div>
         </section>
       )}
